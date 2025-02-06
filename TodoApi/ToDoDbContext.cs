@@ -17,8 +17,8 @@ public partial class ToDoDbContext : DbContext
 
     public virtual DbSet<Task> Tasks { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseMySql("name=ToDoDB", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.33-mysql"));
+    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //     => optionsBuilder.UseMySql("name=ToDoDB", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.33-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -28,11 +28,15 @@ public partial class ToDoDbContext : DbContext
 
         modelBuilder.Entity<Task>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("tasks");
+            entity.ToTable("Tasks");
 
-            entity.Property(e => e.Name).HasMaxLength(100);
+            entity.Property(e => e.Id).HasColumnName("Id");
+            entity.Property(e => e.IsComplete).HasColumnName("IsComplete");
+            entity.Property(e => e.Name)
+                .HasMaxLength(100)
+                .HasColumnName("Name");
         });
 
         OnModelCreatingPartial(modelBuilder);
