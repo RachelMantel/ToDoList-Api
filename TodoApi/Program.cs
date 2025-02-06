@@ -21,8 +21,11 @@ builder.Services.AddCors(options =>
         });
 });
 
+
+
 // הוספת שירותי Swagger
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "ToDo API", Version = "v1" });
@@ -30,7 +33,6 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// שימוש ב-Swagger (כמובן רק בסביבה של פיתוח)
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>
