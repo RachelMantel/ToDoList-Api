@@ -30,7 +30,7 @@ public partial class ToDoDbContext : DbContext
         {
              entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("Tasks");
+            entity.ToTable("tasks");
 
             entity.Property(e => e.Id).HasColumnName("Id");
             entity.Property(e => e.IsComplete).HasColumnName("IsComplete");
